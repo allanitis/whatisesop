@@ -2,16 +2,18 @@ import { Calculator } from 'lucide-react';
 import { useState } from 'react';
 
 export function EsopCalculator() {
-  const [strikePrice, setStrikePrice] = useState<number>(1);
-  const [totalShares, setTotalShares] = useState<number>(1000000);
-  const [currentPrice, setCurrentPrice] = useState<number>(2);
-  const [optionsCount, setOptionsCount] = useState<number>(10000);
+  const [strikePrice, setStrikePrice] = useState<number | null>(1);
+  const [totalShares, setTotalShares] = useState<number | null>(1000000);
+  const [currentPrice, setCurrentPrice] = useState<number | null>(2);
+  const [optionsCount, setOptionsCount] = useState<number | null>(10000);
 
   const calculateOwnership = () => {
+    if (totalShares === null || optionsCount === null) return 0;
     return ((optionsCount / totalShares) * 100).toFixed(4);
   };
 
   const calculateValue = () => {
+    if (strikePrice === null || optionsCount === null || currentPrice === null) return 0;
     return ((currentPrice - strikePrice) * optionsCount).toFixed(2);
   };
 
@@ -41,10 +43,8 @@ export function EsopCalculator() {
                   <input
                     type="number"
                     id="strikePrice"
-                    min="0.01"
-                    step="0.01"
-                    value={strikePrice}
-                    onChange={(e) => setStrikePrice(Math.max(0.01, Number(e.target.value)))}
+                    value={strikePrice !== null ? strikePrice : ''}
+                    onChange={(e) => setStrikePrice(e.target.value ? Number(e.target.value) : null)}
                     className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -55,9 +55,8 @@ export function EsopCalculator() {
                   <input
                     type="number"
                     id="totalShares"
-                    min="1"
-                    value={totalShares}
-                    onChange={(e) => setTotalShares(Math.max(1, Number(e.target.value)))}
+                    value={totalShares !== null ? totalShares : ''}
+                    onChange={(e) => setTotalShares(e.target.value ? Number(e.target.value) : null)}
                     className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -68,10 +67,9 @@ export function EsopCalculator() {
                   <input
                     type="number"
                     id="currentPrice"
-                    min="0.01"
                     step="0.01"
-                    value={currentPrice}
-                    onChange={(e) => setCurrentPrice(Math.max(0.01, Number(e.target.value)))}
+                    value={currentPrice !== null ? currentPrice : ''}
+                    onChange={(e) => setCurrentPrice(e.target.value ? Number(e.target.value) : null)}
                     className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
@@ -83,8 +81,8 @@ export function EsopCalculator() {
                     type="number"
                     id="optionsCount"
                     min="1"
-                    value={optionsCount}
-                    onChange={(e) => setOptionsCount(Math.max(1, Number(e.target.value)))}
+                    value={optionsCount !== null ? optionsCount : ''}
+                    onChange={(e) => setOptionsCount(e.target.value ? Number(e.target.value) : null)}
                     className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>

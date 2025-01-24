@@ -14,6 +14,15 @@ export function WhatIsEsop() {
             It's a benefit that gives you the right to buy shares in your company at a predetermined price, 
             making you a partial owner of the business you help build.
           </p>
+          <div className="bg-yellow-50 rounded-xl p-6 mb-6">
+            <h3 className="text-xl font-semibold text-slate-900 mb-3">📢 Important Note for Public Company Employees</h3>
+            <p className="text-slate-700">
+              If you work at a public company (like Apple, Google, or Microsoft), your stock compensation likely comes as RSUs 
+              (Restricted Stock Units) rather than ESOPs. RSUs work differently — they have a known value and can be sold 
+              immediately after vesting on the public market. This guide focuses primarily on startup ESOPs, where the value 
+              and liquidity of your shares are less certain.
+            </p>
+          </div>
           <div className="bg-blue-50 rounded-xl p-6">
             <h3 className="text-xl font-semibold text-slate-900 mb-4">Key Components:</h3>
             <ul className="space-y-3">
